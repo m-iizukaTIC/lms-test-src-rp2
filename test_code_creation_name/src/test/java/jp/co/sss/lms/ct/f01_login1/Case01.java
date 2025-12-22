@@ -44,7 +44,7 @@ public class Case01 {
 		webDriver.get("http://localhost:8080/lms");
 		// 開いたページのキャプチャを取得する
 		File index_access_success = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(index_access_success, new File("C:\\work\\ScreenShot\\index_access_success.png"));
+		FileUtils.copyFile(index_access_success, new File("evidence/Case01/index_access_success.png"));
 	}
 
 }
