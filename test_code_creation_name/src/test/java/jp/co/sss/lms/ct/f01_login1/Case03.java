@@ -57,7 +57,7 @@ public class Case03 {
 	void test02() throws Exception {
 		// ユーザID・パスワード入力欄にDBに登録されていないユーザーを入力し、ログインを実行
 		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA01");
-		webDriver.findElement(By.id("password")).sendKeys("StudentAA01");
+		webDriver.findElement(By.id("password")).sendKeys("ItTest2023");
 		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
 
 		// ログイン成功による画面遷移が反映されるまで待機
