@@ -41,7 +41,8 @@ public class Case02 {
 		// 画面遷移
 		goTo("http://localhost:8080/lms");
 		// アクセスが成功しているか確認
-		assertTrue(webDriver.getCurrentUrl().contains("/lms/"));
+		String url = webDriver.getCurrentUrl();
+		assertTrue(url.contains("/lms/"));
 		// エビデンス取得
 		getEvidence(new Object() {
 		});
@@ -53,8 +54,10 @@ public class Case02 {
 	void test02() throws Exception {
 
 		// ユーザID・パスワード入力欄にDBに登録されていないユーザーを入力し、ログインを実行
-		webDriver.findElement(By.id("loginId")).sendKeys("NotUser001");
-		webDriver.findElement(By.id("password")).sendKeys("NotUser001");
+		WebElement loginId = webDriver.findElement(By.id("loginId"));
+		loginId.sendKeys("NotUser001");
+		WebElement password = webDriver.findElement(By.id("password"));
+		password.sendKeys("NotUser001");
 		WebElement login = webDriver.findElement(By.cssSelector(".btn.btn-primary"));
 		login.click();
 
@@ -62,7 +65,8 @@ public class Case02 {
 		visibilityTimeout(By.cssSelector(".help-inline.error"), 10);
 
 		// 正しいエラーメッセージが表示されているか？
-		String errorMessage = webDriver.findElement(By.cssSelector(".help-inline.error")).getText();
+		WebElement errorElement = webDriver.findElement(By.cssSelector(".help-inline.error"));
+		String errorMessage = errorElement.getText();
 		assertEquals("* ログインに失敗しました。", errorMessage);
 
 		// ログイン実行結果のキャプチャを取得する
