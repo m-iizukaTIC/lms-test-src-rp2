@@ -89,7 +89,7 @@ public class Case04 {
 		// リンク押下による画面遷移が反映されるまで待機
 		pageLoadTimeout(5);
 
-		// ログインが成功しているか確認
+		// リンク押下による画面遷移が成功しているか確認
 		String url = webDriver.getCurrentUrl();
 		assertTrue(url.contains("/help"));
 
