@@ -39,7 +39,8 @@ public class Case01 {
 		// 画面遷移
 		goTo("http://localhost:8080/lms");
 		// アクセスが成功しているか確認
-		assertTrue(webDriver.getCurrentUrl().contains("/lms/"));
+		String url = webDriver.getCurrentUrl();
+		assertTrue(url.contains("/lms/"));
 		// エビデンス取得
 		getEvidence(new Object() {
 		});
