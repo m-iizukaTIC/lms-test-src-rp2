@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * 結合テスト ログイン機能①
@@ -39,6 +40,8 @@ public class Case02 {
 	void test01() throws Exception {
 		// 画面遷移
 		goTo("http://localhost:8080/lms");
+		// アクセスが成功しているか確認
+		assertTrue(webDriver.getCurrentUrl().contains("/lms/"));
 		// エビデンス取得
 		getEvidence(new Object() {
 		});
@@ -52,15 +55,15 @@ public class Case02 {
 		// ユーザID・パスワード入力欄にDBに登録されていないユーザーを入力し、ログインを実行
 		webDriver.findElement(By.id("loginId")).sendKeys("NotUser001");
 		webDriver.findElement(By.id("password")).sendKeys("NotUser001");
-		webDriver.findElement(By.cssSelector(".btn.btn-primary")).click();
+		WebElement login = webDriver.findElement(By.cssSelector(".btn.btn-primary"));
+		login.click();
 
 		// ログイン失敗によるエラーメッセージが反映されるまで待機
 		visibilityTimeout(By.cssSelector(".help-inline.error"), 10);
 
 		// 正しいエラーメッセージが表示されているか？
-		assertEquals("* ログインに失敗しました。", webDriver
-				.findElement(By.cssSelector(".help-inline.error"))
-				.getText());
+		String errorMessage = webDriver.findElement(By.cssSelector(".help-inline.error")).getText();
+		assertEquals("* ログインに失敗しました。", errorMessage);
 
 		// ログイン実行結果のキャプチャを取得する
 		getEvidence(new Object() {
