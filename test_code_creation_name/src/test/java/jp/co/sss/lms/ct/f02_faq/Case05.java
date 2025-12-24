@@ -144,8 +144,9 @@ public class Case05 {
 		// 検索結果が表示されるまで待機
 		pageLoadTimeout(5);
 
-		// 検索によって表示された項目全てに「何か」が入っているか確認
-		List<WebElement> results = webDriver.findElements(By.cssSelector("dl dt span:nth-child(2)"));
+		// 検索によって表示された項目(質問+回答)全てに「何か」が入っているか確認
+		List<WebElement> results = webDriver.findElements(By.cssSelector("dl"));
+		assertFalse(results.isEmpty());
 		for (WebElement result : results) {
 			String text = result.getText();
 			assertTrue(text.contains("何か"));
